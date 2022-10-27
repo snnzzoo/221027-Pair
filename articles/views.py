@@ -8,9 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    article = Article.objects.order_by("-pk")
+    articles = Article.objects.order_by("-pk")
     context = {
-        "article": article,
+        "articles": articles,
     }
     return render(request, "articles/index.html", context)
 
