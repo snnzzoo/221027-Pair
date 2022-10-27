@@ -60,7 +60,7 @@ class Review(models.Model):
         options={"quality": 100},
     )
     thumbnail = ImageSpecField(source='image', 
-                                processors=[ResizeToFill(120,80)], 
+                                processors=[ResizeToFill(90,60)], 
                                 format='JPEG')
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
 
