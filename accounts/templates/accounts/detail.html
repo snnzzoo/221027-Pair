@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+
     <h1>{{ user.username }}님의 프로필</h1>
     <p>{{ user.email }} | {{ user.full_name }}</p>
     <p>팔로우 : {{ user.followings.count }} | 팔로워 : {{ user.followers.count }}</p>
@@ -45,5 +45,5 @@
             {% endfor %}
         </div>
     </div>
-</div>
+
 {% endblock content %}
