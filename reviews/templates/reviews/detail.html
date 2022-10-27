@@ -42,8 +42,8 @@
             <img src="{{ review.image.url }}" class="container">
           </div>
         {% endif %}
-        <p class="fs-6 mt-3 px-3">{{ review.content}}</p>
-        <hr class="mt-0">
+        <p class="fs-6 mt-3 mb-5 px-3">{{ review.content}}</p>
+        <hr>
         <!-- 아이콘 -->
         <div class="d-flex align-items-center">
           <!-- 공유 -->
@@ -72,11 +72,13 @@
   <div class="d-flex justify-content-end mb-5">
     {% if request.user == review.user %}
     <div>
-      <a class="btn btn-outline-success m-2" href="#">Edit</a>
-      <a class="btn btn-outline-danger m-2" href="#">Delete</a>
+      <a class="btn btn-outline-success m-2" href="{% url 'reviews:update' review.pk %}">수정</a>
+      <a class="btn btn-outline-dark m-2" href="{% url 'reviews:index' %}">뒤로</a>
+      <a class="btn btn-outline-danger m-2" href="{% url 'reviews:delete' review.pk %}">삭제</a>
     </div>
+    {% else %}
+    <a class="btn btn-outline-dark m-2" href="{% url 'reviews:index' %}">뒤로</a>
     {% endif %}
-    <a class="btn btn-outline-dark m-2" href="{% url 'reviews:index' %}">Back</a>
   </div>
 
       

@@ -15,8 +15,8 @@
             {% csrf_token %}
             {% bootstrap_form review_form %}
             <div class="text-end mt-4">
-              <input type="submit" class="btn btn-warning" value="Save">
-              <a class=" btn btn-dark ms-3" href="{% url 'reviews:index' %}" role="button">Back</a>
+              <input type="submit" class="btn btn-success" value="저장">
+              <a class=" btn btn-outline-dark ms-3" href="{% url 'reviews:index' %}" role="button">뒤로</a>
             </div>
           </form>
         </div>
