@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "articles",
     "accounts",
-    'reviews',
+    "reviews",
     "django_bootstrap5",
     "multiselectfield",
     "imagekit",
