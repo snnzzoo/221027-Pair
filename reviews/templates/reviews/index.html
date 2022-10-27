@@ -7,8 +7,8 @@
     <div class="row g-4 g-sm-4 g-md-5 row-cols-1 row-cols-sm-2 row-cols-md-3">
       {% for review in reviews %}
         <div class="col mt-5 mb-4">
-          <div class="card h-100 border border-5 border-warning shadow-lg">
-            <a class="text-decoration-none" href="#">
+          <div class="card h-100 border border-5 border-success shadow-lg">
+            <a class="text-decoration-none" href="{% url 'reviews:detail' review.pk %}">
               <h5 class="card-header fw-bold py-3 mb-3">
                 {{ review.title }}
               </h5>
