@@ -5,112 +5,109 @@
 
 {% block content %}
 
-  <div class="container d-flex flex-column justify-content-center my-5">
-    <div class="p-5 rounded-4 shadow-lg">
-      <h2 class="fw-bold text-center">{{ review.title }}</h2>
-      <hr>
-      <div class="d-flex justify-content-between align-middle">
-        <p>
-          작성자 :
-          {{ review.user }}</p>
-        {% if review.created_at == review.updated_at %}
-          <p class="text-muted">{{ review.created_at }}</p>
-        {% else %}
-          <p class="text-muted">{{ review.updated_at }}
-            (수정됨)</p>
-        {% endif %}
+<!-- 책 정보 -->
+<div class="row">
+  <div class="col-sm-3">
+    <div class="card my-5">
+      <div class="card-body">
+        {% comment %} <img src="{{ book_image }}" class="card-img-top rounded-1" style="width: 10rem; height: 15rem;" alt="..."> {% endcomment %}
+        <h5 class="fw-bold text-center">{{ review.book }}</h5>
+        <hr>
+        <p>평점 : {{ review.rating }}</p>
+        <p>작가 : {{ review.writer }}</p>
+        <p>출판사 : {{ review.publisher }}</p>
+        <p>장르 : {{ review.genre }}</p> <!-- 장르를 어떻게 받아 올 수 있을까? -->
       </div>
-      <hr class="mt-0">
-      <!-- 책 정보 -->
-      <p class="">
-        <span>평점
-          <span class="text-warning fw-bold">{{ star }}</span>
-          <span class="small">{{ avg }}({{ cnt }})</span>
-        </span>
-        <span>·</span>
-        <span>분류 : {{ review.jenre }}</span>
-        <span>·</span>
-        <span>출판사 : {{ review.publisher }}</span>
-        <span>·</span>
-        <span>감독 :
-          {{ review.writer }}</span>
-      </p>
-      <p class="">
-        <span>개봉일 :
-          </span>
-      </p>
-      <div class="d-flex">
-        <div class="text-center me-5 my-2">
-          <a class="p-0 btn btn-lg border-0" href="">
-            <span class="bi bi-share fs-4"></span>
-            <p class="small">Share</p>
-          </a>
-        </div>
-        <!-- 좋아요 -->
-        <div class="text-center me-4 my-2">
-          <a class="p-0 btn btn-lg border-0" href="#">
-            {% comment %} {% if request.user in movie.like_users.all %}
-              <i class="bi bi-heart-fill fs-2"></i>
-            {% else %}
-              <i class="bi bi-heart fs-2"></i>
-            {% endif %} {% endcomment %}
-            <span class="bi bi-heart fs-4"></span>
-            <p class="small">Like</p>
-          </a>
-        </div>
-      </div>
-      <hr class="mt-0">
-      {% if review.image %}
-        <div class="d-flex justify-content-center">
-          <img src="{{ review.image.url }}" class="container">
-        </div>
-      {% endif %}
-      <pre class="fs-6">{{ review.content}}</pre>
-      {% if request.user == review.user %}
-      <div>
-        <a class=" btn btn-outline-dark m-2" href="#">Edit</a>
-        <a class=" btn btn-outline-danger m-2" href="#">Delete</a>
-      </div>
-      {% endif %}
-
-  </div>
-
-
-<div class="d-flex justify-content-end mb-4 mt-5">
-<a class="btn btn-warning" href="#">Add Review</a>
-<a class="btn btn-dark ms-3" href="{% url 'reviews:index' %}">Back</a>
-</div>
-      
-      <!-- 댓글 -->
-      {% comment %} <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form comment_form %}
-        <div class="text-end"><input class="btn btn-warning" type="submit" value="Comment"></div>
-      </form>
-      <h5 class="">comments ({{ comments|length }})</h5>
-      <hr>
-      <ul class="list-group list-group-flush rounded-2">
-        {% for comment in comments %}
-          <li class="list-group-item align-middle">
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="card-text text-muted m-2">{{ comment.user }}</p>
-              <p class="card-text text-muted pt-3">{{ comment.created_at }}</p>
-
-            </div>
-            <div class="d-flex justify-content-between align-items-center m-2">
-              <p class="">
-                {{ comment.content }}
-              </p>
-              {% if request.user == comment.user %}
-                <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
-                  {% csrf_token %}
-                  <input class="text-danger bg-white ms-3 border-1 border-danger text-decoration-none rounded-2" type="submit" value="삭제">
-                </form>
-              {% endif %}
-            </div>
-          </li>
-        {% endfor %}
-      </ul> {% endcomment %}
     </div>
   </div>
+
+  <!-- 리뷰 -->
+  <div class="col-sm-9">
+    <div class="container d-flex flex-column justify-content-center mt-5 mb-3">
+      <div class="p-5 rounded-4 shadow-lg">
+        <h2 class="fw-bold text-center">{{ review.title }}</h2>
+        <hr>
+        <div class="d-flex justify-content-between align-middle">
+          <p>작성자 : {{ review.user }}</p>
+          {% if review.created_at == review.updated_at %}
+            <p class="text-muted">{{ review.created_at|date:'Y-m-d H:i' }}</p>
+          {% else %}
+            <p class="text-muted">{{ review.updated_at|date:'Y-m-d H:i' }}
+              (수정됨)</p>
+          {% endif %}
+        </div>
+        <hr class="mt-0">
+        {% if review.image %}
+          <div class="d-flex justify-content-center">
+            <img src="{{ review.image.url }}" class="container">
+          </div>
+        {% endif %}
+        <p class="fs-6 mt-3 px-3">{{ review.content}}</p>
+        <hr class="mt-0">
+        <!-- 아이콘 -->
+        <div class="d-flex align-items-center">
+          <!-- 공유 -->
+            <a class="p-0 btn btn-lg border-0 bi bi-share me-3" href="#"></a>
+          <!-- 좋아요 -->
+          <div class="me-3">
+            <a class="p-0 m-0 btn btn-lg border-0" href="#">
+              {% comment %} {% if request.user in movie.like_users.all %}
+                <i class="bi bi-heart-fill fs-2"></i>
+              {% else %}
+                <i class="bi bi-heart fs-2"></i>
+              {% endif %} {% endcomment %}
+              <span class="bi bi-heart"></span>
+            </a>
+          </div>
+          <!-- 스크랩 -->
+            <a class="p-0 m-0 btn btn-lg border-0 bi bi-bookmark" href="#"></a>
+        </div> 
+      </div>
+    </div>    
+  </div>
+
+</div>
+
+
+  <div class="d-flex justify-content-end mb-5">
+    {% if request.user == review.user %}
+    <div>
+      <a class="btn btn-outline-success m-2" href="#">Edit</a>
+      <a class="btn btn-outline-danger m-2" href="#">Delete</a>
+    </div>
+    {% endif %}
+    <a class="btn btn-outline-dark m-2" href="{% url 'reviews:index' %}">Back</a>
+  </div>
+
+      
+  <!-- 댓글 -->
+  {% comment %} <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <div class="text-end"><input class="btn btn-warning" type="submit" value="Comment"></div>
+  </form>
+  <h5 class="">comments ({{ comments|length }})</h5>
+  <hr>
+  <ul class="list-group list-group-flush rounded-2">
+    {% for comment in comments %}
+      <li class="list-group-item align-middle">
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="card-text text-muted m-2">{{ comment.user }}</p>
+          <p class="card-text text-muted pt-3">{{ comment.created_at }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center m-2">
+          <p class="">
+            {{ comment.content }}
+          </p>
+          {% if request.user == comment.user %}
+            <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
+              {% csrf_token %}
+              <input class="text-danger bg-white ms-3 border-1 border-danger text-decoration-none rounded-2" type="submit" value="삭제">
+            </form>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul> {% endcomment %}
+
 {% endblock content %}
