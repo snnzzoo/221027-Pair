@@ -14,9 +14,10 @@
 
 </head>
 <body>
-
+    <!-- navbar -->
+    {% include "navbar.html" %}
     {% block content %}{% endblock content %}
-
+    {% include "footer.html" %}
   {% bootstrap_javascript %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
