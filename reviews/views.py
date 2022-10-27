@@ -29,3 +29,11 @@ def create(request):
         'review_form': review_form
     }
     return render(request, 'reviews/create.html', context)
+
+
+def detail(request, pk):
+    review = Review.objects.get(pk=pk)
+    context = {
+        'review': review
+    }
+    return render(request, 'reviews/detail.html', context)

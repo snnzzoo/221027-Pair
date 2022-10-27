@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+
+  <div class="container d-flex flex-column justify-content-center my-5">
+    <div class="review-detail p-5 rounded-4 shadow-lg">
+      <div class="d-flex justify-content-between">
+      <h2 class="">{{ review.title }}</h2>
+        {% if request.user == review.user %}
+          <a href="#" class="btn btn-outline-dark mt-5">Edit</a>
+        {% endif %}
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between align-middle">
+        <p>
+          작성자 :
+          {{ review.user }}</p>
+        {% if review.created_at == review.updated_at %}
+          <p class="text-muted">{{ review.created_at }}</p>
+        {% else %}
+          <p class="text-muted">{{ review.updated_at }}
+            (수정됨)</p>
+        {% endif %}
+      </div>
+      <hr class="mt-0">
+      {% if review.image %}
+        <div class="d-flex justify-content-center">
+          <img src="{{ review.image.url }}" class="container">
+        </div>
+      {% endif %}
+      <pre class="fs-6">{{ review.content}}</pre>
+      {% comment %} <div class="d-flex justify-content-end my-3">
+        {% if request.user == review.user %}
+          <a href="{% url 'articles:update' review.pk %}" class="btn btn-outline-dark mt-5">Edit</a>
+        {% endif %}
+      </div> {% endcomment %}
+      <hr>
+      
+      <!-- 댓글 -->
+      {% comment %} <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form comment_form %}
+        <div class="text-end"><input class="btn btn-warning" type="submit" value="Comment"></div>
+      </form>
+      <h5 class="text-white">comments ({{ comments|length }})</h5>
+      <hr>
+      <ul class="list-group list-group-flush rounded-2">
+        {% for comment in comments %}
+          <li class="list-group-item align-middle">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text text-muted m-2">{{ comment.user }}</p>
+              <p class="card-text text-muted pt-3">{{ comment.created_at }}</p>
+
+            </div>
+            <div class="d-flex justify-content-between align-items-center m-2">
+              <p class="">
+                {{ comment.content }}
+              </p>
+              {% if request.user == comment.user %}
+                <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
+                  {% csrf_token %}
+                  <input class="text-danger bg-white ms-3 border-1 border-danger text-decoration-none rounded-2" type="submit" value="삭제">
+                </form>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul> {% endcomment %}
+    </div>
+  </div>
+{% endblock content %}
