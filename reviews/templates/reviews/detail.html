@@ -6,13 +6,8 @@
 {% block content %}
 
   <div class="container d-flex flex-column justify-content-center my-5">
-    <div class="review-detail p-5 rounded-4 shadow-lg">
-      <div class="d-flex justify-content-between">
-      <h2 class="">{{ review.title }}</h2>
-        {% if request.user == review.user %}
-          <a href="#" class="btn btn-outline-dark mt-5">Edit</a>
-        {% endif %}
-      </div>
+    <div class="p-5 rounded-4 shadow-lg">
+      <h2 class="fw-bold text-center">{{ review.title }}</h2>
       <hr>
       <div class="d-flex justify-content-between align-middle">
         <p>
@@ -26,18 +21,65 @@
         {% endif %}
       </div>
       <hr class="mt-0">
+      <!-- 책 정보 -->
+      <p class="">
+        <span>평점
+          <span class="text-warning fw-bold">{{ star }}</span>
+          <span class="small">{{ avg }}({{ cnt }})</span>
+        </span>
+        <span>·</span>
+        <span>분류 : {{ review.jenre }}</span>
+        <span>·</span>
+        <span>출판사 : {{ review.publisher }}</span>
+        <span>·</span>
+        <span>감독 :
+          {{ review.writer }}</span>
+      </p>
+      <p class="">
+        <span>개봉일 :
+          </span>
+      </p>
+      <div class="d-flex">
+        <div class="text-center me-5 my-2">
+          <a class="p-0 btn btn-lg border-0" href="">
+            <span class="bi bi-share fs-4"></span>
+            <p class="small">Share</p>
+          </a>
+        </div>
+        <!-- 좋아요 -->
+        <div class="text-center me-4 my-2">
+          <a class="p-0 btn btn-lg border-0" href="#">
+            {% comment %} {% if request.user in movie.like_users.all %}
+              <i class="bi bi-heart-fill fs-2"></i>
+            {% else %}
+              <i class="bi bi-heart fs-2"></i>
+            {% endif %} {% endcomment %}
+            <span class="bi bi-heart fs-4"></span>
+            <p class="small">Like</p>
+          </a>
+        </div>
+      </div>
+      <hr class="mt-0">
       {% if review.image %}
         <div class="d-flex justify-content-center">
           <img src="{{ review.image.url }}" class="container">
         </div>
       {% endif %}
       <pre class="fs-6">{{ review.content}}</pre>
-      {% comment %} <div class="d-flex justify-content-end my-3">
-        {% if request.user == review.user %}
-          <a href="{% url 'articles:update' review.pk %}" class="btn btn-outline-dark mt-5">Edit</a>
-        {% endif %}
-      </div> {% endcomment %}
-      <hr>
+      {% if request.user == review.user %}
+      <div>
+        <a class=" btn btn-outline-dark m-2" href="#">Edit</a>
+        <a class=" btn btn-outline-danger m-2" href="#">Delete</a>
+      </div>
+      {% endif %}
+
+  </div>
+
+
+<div class="d-flex justify-content-end mb-4 mt-5">
+<a class="btn btn-warning" href="#">Add Review</a>
+<a class="btn btn-dark ms-3" href="{% url 'reviews:index' %}">Back</a>
+</div>
       
       <!-- 댓글 -->
       {% comment %} <form action="{% url 'articles:comment_create' review.pk %}" method="POST">
@@ -45,7 +87,7 @@
         {% bootstrap_form comment_form %}
         <div class="text-end"><input class="btn btn-warning" type="submit" value="Comment"></div>
       </form>
-      <h5 class="text-white">comments ({{ comments|length }})</h5>
+      <h5 class="">comments ({{ comments|length }})</h5>
       <hr>
       <ul class="list-group list-group-flush rounded-2">
         {% for comment in comments %}
