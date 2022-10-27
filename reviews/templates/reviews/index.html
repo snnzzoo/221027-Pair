@@ -3,11 +3,11 @@
 {% block content %}
 
   <div class="container text-center py-5">
-    <h1 class="text-center mb-5">책 리뷰</h1>
+    <h1 class="text-center mb-5 fw-bold">책 리뷰</h1>
     <div class="row g-4 g-sm-4 g-md-5 row-cols-2 row-cols-sm-3 row-cols-md-4">
       {% for review in reviews %}
         <div class="col mt-5 mb-4">
-          <div class="card h-100 border border-5 border-success shadow-lg">
+          <div class="card h-100 border border-4 border-success shadow-lg">
             <a class="text-decoration-none" href="{% url 'reviews:detail' review.pk %}">
               <h5 class="card-header fw-bold py-3 mb-3">
                 {{ review.title }}
@@ -40,7 +40,7 @@
       {% endfor %}
     </div>
     <div class="d-flex justify-content-end mt-4 fixed-bottom">
-      <a class="btn btn-warning m-5 fw-bold" href="{% url 'reviews:create' %}">Add Review</a>
+      <a class="btn btn-warning m-5 fw-bold" href="{% url 'reviews:create' %}">리뷰 작성</a>
     </div>
   </div>
 
