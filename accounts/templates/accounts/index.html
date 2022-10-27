@@ -17,10 +17,11 @@
 <div class="row">
   {% for user in users %}
   <div>
-    {% comment %} <a href="{% url 'accounts:detail' users.pk %}">{{ user.username }} {% endcomment %}
+    
     <ol>
+        <a href="{% url 'accounts:detail' user.pk %}">
         <ul>{{ user.username }}</ul>
-    {% comment %} </a> {% endcomment %}
+        </a>
     </ol>
   </div>
   {% endfor %}
