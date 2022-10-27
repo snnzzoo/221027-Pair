@@ -38,7 +38,7 @@ def detail(request, pk):
     comment_form = CommentForm()
     context = {
         "article": article,
-        "comments": article.comment_set_all(),
+        "comments": article.comment_set.all(),
         "comment_form": comment_form,
     }
     return render(request, "articles/detail.html", context)
