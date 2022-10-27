@@ -33,16 +33,17 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "accounts",
-    "django_bootstrap5",
-    "django_extensions",
-    "multiselectfield",
-    "imagekit",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'reviews',
+    'django_bootstrap5',
+    'multiselectfield',
+    'imagekit',
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
