@@ -7,9 +7,19 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.decorators.http import require_safe
+from .models import User
 
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserChangeForm, CustomUserCreationForm
+
+
+@require_safe
+def index(request):
+    users = User.objects.order_by("pk")
+    context = {"users": users}
+    return render(request, "accounts/index.html", context)
+
 
 # Create your views here.
 def signup(request):

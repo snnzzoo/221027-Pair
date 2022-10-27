@@ -3,7 +3,7 @@
 {% block content %}
 
     <h1>{{ user.username }}님의 프로필</h1>
-    <p>{{ user.email }} | {{ user.full_name }}</p>
+    {% comment %} <p>{{ user.email }} | {{ user.full_name }}</p> {% endcomment %}
     <p>팔로우 : {{ user.followings.count }} | 팔로워 : {{ user.followers.count }}</p>
     {% if request.user != user %}
         {% if request.user in user.followers.all %}
