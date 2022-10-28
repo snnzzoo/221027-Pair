@@ -7,11 +7,6 @@
         📕
       {% endif %}
     </a>
-    <form class="form-inline my-2 my-lg-0" action="{% url 'search:searchResult' %}" method="get">
-      {% csrf_token %}
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-    </form>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,6 +33,13 @@
             <a class="nav-link" href="{% url 'accounts:login' %}">로그인</a>
           </li>
         {% endif %}
+      <!-- 서치바 -->
+      <form class="nav-item form-inline my-2 my-lg-0 d-flex" style="position:sticky; top:70px; right:25px;" action="{% url 'search:searchResult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">SEARCH<i class="fas fa-search"></i></button>
+      </form>
+      <!-- 서치바 -->
       </ul>
     </div>
   </div>
