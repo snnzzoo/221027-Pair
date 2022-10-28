@@ -49,13 +49,12 @@
           <a class="p-0 btn btn-lg border-0 bi bi-share me-3" href="#"></a>
         <!-- 좋아요 -->
         <div class="me-3">
-          <a class="p-0 m-0 btn btn-lg border-0" href="#">
-            {% comment %} {% if request.user in movie.like_users.all %}
-              <i class="bi bi-heart-fill fs-2"></i>
+          <a class="p-0 m-0 btn btn-lg border-0" href="{% url 'reviews:like' review.pk %}">
+            {% if request.user in review.like_users.all %}
+              <i class="bi bi-heart-fill"></i>
             {% else %}
-              <i class="bi bi-heart fs-2"></i>
-            {% endif %} {% endcomment %}
-            <span class="bi bi-heart"></span>
+              <i class="bi bi-heart"></i>
+            {% endif %}
           </a>
         </div>
         <!-- 스크랩 -->

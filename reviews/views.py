@@ -80,3 +80,15 @@ def comment_create(request, pk):
 def comment_delete(request, review_pk, comment_pk):
     Comment.objects.get(pk=comment_pk).delete()
     return redirect('reviews:detail', review_pk)
+
+
+@login_required
+def like(request, pk):
+    review = Review.objects.get(pk=pk)
+    # 이미 좋아요를 누른 경우 => 좋아요 취소
+    # if request.user in review.like_users.all():
+    if review.like_users.filter(pk=request.user.pk).exists():
+        review.like_users.remove(request.user)
+    else:
+        review.like_users.add(request.user)
+    return redirect('reviews:detail', pk)
