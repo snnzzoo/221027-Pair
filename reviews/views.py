@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ReviewForm
-from .models import Review
+from .forms import CommentForm, ReviewForm
+from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 
 
@@ -33,8 +33,11 @@ def create(request):
 
 def detail(request, pk):
     review = Review.objects.get(pk=pk)
+    comment_form = CommentForm()
     context = {
-        'review': review
+        'review': review,
+        'comments': review.comment_set.all(),
+        'comment_form': comment_form,
     }
     return render(request, 'reviews/detail.html', context)
 
@@ -60,3 +63,20 @@ def delete(request, pk):
     Review.objects.get(pk=pk).delete()
     return redirect('reviews:index')
 
+
+@login_required
+def comment_create(request, pk):
+    review = Review.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.user = request.user
+        comment.save()
+    return redirect('reviews:detail', pk)
+
+
+@login_required
+def comment_delete(request, review_pk, comment_pk):
+    Comment.objects.get(pk=comment_pk).delete()
+    return redirect('reviews:detail', review_pk)
