@@ -4,6 +4,9 @@
 
   <div class="container text-center py-5">
     <h1 class="text-center mb-5 fw-bold">책 리뷰</h1>
+    <div class="d-flex justify-content-end mt-4">
+      <a class="btn btn-warning btn-lg mb-4 fw-bold rounded-pill" href="{% url 'reviews:create' %}">리뷰 작성</a>
+    </div>
     <div class="row g-4 g-sm-4 g-md-5 row-cols-2 row-cols-sm-3 row-cols-md-4">
       {% for review in reviews %}
         <div class="col mt-5 mb-4">
@@ -18,7 +21,7 @@
                 </div>
               {% else %}
                 <div class="card-hover">
-                  <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="..." style="width: 200px; height: 300px;">
+                  <img src="{% static 'images/empty.jpg' %}" class="card-img-top" alt="..." style="width: 200px; height: 150px;">
                 </div>
               {% endif %}
               <ul class="list-group list-group-flush">
@@ -39,9 +42,32 @@
         </div>
       {% endfor %}
     </div>
-    <div class="d-flex justify-content-end mt-4 fixed-bottom">
-      <a class="btn btn-warning m-5 fw-bold" href="{% url 'reviews:create' %}">리뷰 작성</a>
-    </div>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-4">
+        {% if posts.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link">이전</a>
+          </li>
+        {% endif %}
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 
 {% endblock %}
