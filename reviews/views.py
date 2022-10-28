@@ -3,13 +3,18 @@ from .forms import CommentForm, ReviewForm
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 # Create your views here.
 def index(request):
     reviews = Review.objects.order_by('-pk')
+    paginator = Paginator(reviews, 8)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     context = {
-        'reviews': reviews
+        'reviews': reviews,
+        'posts': posts,
     }
     return render(request, 'reviews/index.html', context)
 
