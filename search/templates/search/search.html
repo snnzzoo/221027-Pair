@@ -1,0 +1,75 @@
+<div>
+    <p class="text-center" style="padding-top: 20px;">찾으시는 검색어 : <b>"{{ query }}"</b></p>
+</div>
+<div>
+    <div class="row mx-auto">
+        {% for review in review %}
+            <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+                <div class="card text-center" style="min-width: 18rem;">
+                    <a href="{{ review.get_url }}"><h4>{{ review.name }}</h4></a>
+                    <div class="card-body">>
+                        <p>{{ review.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mx-auto">
+                <p class="text-center" style="padding-top: 20px;">결과가 없어요 ㅠㅠ</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <div class="row mx-auto">
+        {% for user in user %}
+            <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+                <div class="card text-center" style="min-width: 18rem;">
+                    <a href="{{ user.get_url }}"><h4>{{ user.name }}</h4></a>
+                    <div class="card-body">>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mx-auto">
+                <p class="text-center" style="padding-top: 20px;">결과가 없어요 ㅠㅠ</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <div class="row mx-auto">
+        {% for article in article %}
+            <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+                <div class="card text-center" style="min-width: 18rem;">
+                    <a href="{{ article.get_url }}"><h4>{{ article.title }}</h4></a>
+                    <div class="card-body">>
+                        <p>{{ aritcle.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mx-auto">
+                <p class="text-center" style="padding-top: 20px;">결과가 없어요 ㅠㅠ</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div>
+    <div class="row mx-auto">
+        {% for review in review %}
+            <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
+                <div class="card text-center" style="min-width: 18rem;">
+                    <a href="{{ review.get_url }}"><h4>{{ review.title }}</h4></a>
+                    <div class="card-body">>
+                        <p>{{ aritcle.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mx-auto">
+                <p class="text-center" style="padding-top: 20px;">결과가 없어요 ㅠㅠ</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

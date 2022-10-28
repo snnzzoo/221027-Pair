@@ -51,18 +51,17 @@ INSTALLED_APPS = [
     "articles",
     "accounts",
     "reviews",
+    "search",
     "django_bootstrap5",
     "multiselectfield",
     "imagekit",
-    'django_cleanup.apps.CleanupConfig',
-    
+    "django_cleanup.apps.CleanupConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
 ]
 
 MIDDLEWARE = [
@@ -80,7 +79,11 @@ ROOT_URLCONF = "pjt.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "pjt" / "templates"],
+        # "DIRS": [BASE_DIR / "pjt" / "templates"],
+        "DIRS": [
+            os.path.join(BASE_DIR, "pjt", "templates/"),
+            os.path.join(BASE_DIR, "search", "templates/"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
