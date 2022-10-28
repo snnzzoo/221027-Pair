@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CommentForm, ReviewForm
 from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -22,6 +23,7 @@ def create(request):
             review.user = request.user
             review.review = review
             review_form.save()
+            messages.success(request, '리뷰 작성 완료!')
             return redirect('reviews:index')
     else:
         review_form = ReviewForm()
@@ -49,6 +51,7 @@ def update(request, pk):
         review_form = ReviewForm(request.POST, request.FILES, instance=review)
         if review_form.is_valid():
             review_form.save()
+            messages.success(request, '리뷰 수정 완료!')
             return redirect('reviews:detail', pk)
     else:
         review_form = ReviewForm(instance=review)
@@ -61,6 +64,7 @@ def update(request, pk):
 @login_required
 def delete(request, pk):
     Review.objects.get(pk=pk).delete()
+    messages.warning(request, '리뷰 삭제 완료!')
     return redirect('reviews:index')
 
 

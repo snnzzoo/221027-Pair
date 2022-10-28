@@ -46,19 +46,19 @@
       <!-- 아이콘 -->
       <div class="d-flex align-items-center">
         <!-- 공유 -->
-          <a class="p-0 btn btn-lg border-0 bi bi-share me-3" href="#"></a>
+          <a class="p-0 btn btn-lg border-0 bi bi-share me-3 fs-4" href="#"></a>
         <!-- 좋아요 -->
         <div class="me-3">
           <a class="p-0 m-0 btn btn-lg border-0" href="{% url 'reviews:like' review.pk %}">
             {% if request.user in review.like_users.all %}
-              <i class="bi bi-heart-fill"></i>
+              <i class="bi bi-heart-fill fs-4"></i>
             {% else %}
-              <i class="bi bi-heart"></i>
+              <i class="bi bi-heart fs-4"></i>
             {% endif %}
           </a>
         </div>
         <!-- 스크랩 -->
-          <a class="p-0 m-0 btn btn-lg border-0 bi bi-bookmark" href="#"></a>
+          <a class="p-0 m-0 btn btn-lg border-0 bi bi-bookmark fs-4" href="#"></a>
       </div>
     </div>
 
