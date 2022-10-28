@@ -11,10 +11,11 @@
   <a href="{% url 'articles:create' %}" class="btn btn-primary">글 쓰기</a>
   {% endif %}
 </div>
+<hr>
 <!-- content -->
-<div class="flex-wrap my-3">
+<div class="flex-wrap my-3 pb-5">
   <main class="container d-flex justify-content-around">
-    <section class="container float-left" style="width: 85%; height: auto;">
+    <section class="container float-left me-3" style="width: 85%; height: auto;">
       <article class="d-block">
         <div class="row border border-dark border-2">
           {% for article in articles %}
