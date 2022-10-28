@@ -6,17 +6,24 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = [
+            "title",
+            "content",
+            "rating",
+            "image",
             "book",
             "writer",
             "publisher",
             # "genrelist",
             "genre",
-            "title",
-            "content",
-            "rating",
-            "image",
         ]
         labels = {
+            'title': '리뷰 제목',
+            'content': '리뷰 내용',
+            'rating': '평점',
+            'image': '사진 첨부',
+            'book': '책 제목',
+            'writer': '작가',
+            'publisher': '출판사',
             'genre': 'Genre',
         }
         widgets = {
