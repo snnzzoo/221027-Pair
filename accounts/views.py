@@ -8,6 +8,9 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.decorators.http import require_safe
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import User
 
 # from django.contrib.auth.forms import UserCreationForm
@@ -83,3 +86,19 @@ def follow(request, pk):
     else:
         user.followers.add(request.user)
     return redirect("accounts:detail", pk)
+
+
+@login_required
+def password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("index")
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "accounts/password.html", {"form": form})
