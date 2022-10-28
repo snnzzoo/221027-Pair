@@ -32,6 +32,7 @@
                     {{ article.user.username }}
                   </a>
                 </p>
+                <p>{{ article.create_at|date:'SHORT_DATETIME_FORMAT' }}</p>
                 <a href="{% url 'articles:detail' article.pk %}" class="btn btn-outline-primary my-3">CHECK</a>
               </div>
             </div>
@@ -44,7 +45,7 @@
       <article class="d-block">
         <div class="container border border-dark border-2">
           <div class="h-50">
-            <div class="justify-content-center text-center align-middle mt-1">
+            <div class="justify-content-center text-center align-middle mt-2">
               {% if request.user.is_authenticated %}
               <p class="text-center">{{ request.user }}</p>
               {% else %}
@@ -55,13 +56,13 @@
             <div class="justify-content-center text-center">
               {% if request.user.is_authenticated %}
               <span>
-                <button class="btn btn-warning" disabled>계정</button>
-                <button class="btn btn-warning my-1" disabled>계정 관리</button>
+                <a href="{% url 'accounts:detail' user.pk %}" class="btn btn-warning">계정</a>
+                <a href="{% url 'accounts:update' %}" class="btn btn-warning my-2">계정 관리</a>
               </span>
               {% else %}
               <span>
-                <a href="{% url 'accounts:detail' user.pk %}" class="btn btn-warning">계정</a>
-                <a href="{% url 'accounts:update' %}" class="btn btn-warning my-1">계정 관리</a>
+                <button class="btn btn-warning" disabled>계정</button>
+                <button class="btn btn-warning my-2" disabled>계정 관리</button>
               </span>
               {% endif %}
             </div>

@@ -16,7 +16,7 @@
     <p>{{ article.create_at|date:'SHORT_DATETIME_FORMAT' }} | {{ article.updated_at|date:'y-m-d D' }}</p>
     <hr>
     {% if article.image %}
-    <img src="{{ article.image.url }}" alt="...">
+    <img src="{{ article.image.url }}" alt="..." width="400">
     {% endif %}
     <p>{{ article.content }}</p>
   </div>
