@@ -14,17 +14,21 @@ def searchResult(request):
     query = None
     if "q" in request.GET:
         query = request.GET.get("q")
-        user = User.objects.all().filter(
-            Q(name__contains=query) | Q(description__contains=query)
-        )
+        user = User.objects.all().filter(Q(username__contains=query))
         article = Article.objects.all().filter(
-            Q(name__contains=query) | Q(description__contains=query)
+            Q(title__contains=query) | Q(content__contains=query)
         )
         review = Review.objects.all().filter(
-            Q(name__contains=query) | Q(description__contains=query)
+            Q(book__contains=query) | Q(writer__contains=query)
         )
+    context = {
+        "query": query,
+        "user": user,
+        "article": article,
+        "review": review,
+    }
     return render(
         request,
         "search/search.html",
-        {"query": query, "user": user, "article": article, "review": review},
+        context,
     )
