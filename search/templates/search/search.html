@@ -12,8 +12,8 @@
         {% for user in user %}
             <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
                 <div class="card text-center" style="min-width: 18rem;">
-                    <a href="{{ user.get_url }}"><h4>{{ user.name }}</h4></a>
-                    <div class="card-body">>
+                    <a href="{{ user.get_url }}"><h4>{{ user.username }}</h4></a>
+                    <div class="card-body">
                         <p></p>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
                 <div class="card text-center" style="min-width: 18rem;">
                     <a href="{{ article.get_url }}"><h4>{{ article.title }}</h4></a>
-                    <div class="card-body">>
+                    <div class="card-body">
                         <p>{{ aritcle.content }}</p>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
             <div class="my_bottom_magin col-9 col-sm-12 col-md-4 col-md-12 col-lg-4">
                 <div class="card text-center" style="min-width: 18rem;">
                     <a href="{{ review.get_url }}"><h4>{{ review.title }}</h4></a>
-                    <div class="card-body">>
+                    <div class="card-body">
                         <p>{{ aritcle.content }}</p>
                     </div>
                 </div>
