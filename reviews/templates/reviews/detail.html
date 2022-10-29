@@ -9,14 +9,13 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="card my-5">
-      <div class="card-body">
-        {% comment %} <img src="{{ book_image }}" class="card-img-top rounded-1" style="width: 10rem; height: 15rem;" alt="..."> {% endcomment %}
-        <h5 class="fw-bold text-center">{{ review.book }}</h5>
-        <hr>
-        <p>평점 : {{ review.rating }}</p>
-        <p>작가 : {{ review.writer }}</p>
-        <p>출판사 : {{ review.publisher }}</p>
-        <p>장르 : {{ review.genre }}</p> <!-- 장르를 어떻게 받아 올 수 있을까? -->
+      <div class="card-body d-flex flex-column align-items-center">
+        <img src="https://picsum.photos/400/600" class="mb-3" style="width: 120px; height: 150px;" alt="bookcover">
+        <h5 class="fw-bold text-center fs-6">{{ review.book }}</h5>
+        <p class="mb-1">평점 : {{ review.rating }}</p>
+        <p class="mb-1">작가 : {{ review.writer }}</p>
+        <p class="mb-1">출판사 : {{ review.publisher }}</p>
+        <p class="mb-1">장르 : {{ review.genre }}</p> <!-- 장르를 어떻게 받아 올 수 있을까? -->
       </div>
     </div>
   </div>
