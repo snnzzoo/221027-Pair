@@ -14,8 +14,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os, json
-from django.core.exceptions import ImproperlyConfigured
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,29 +24,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY 파일 위치
-secret_file = os.path.join(BASE_DIR, "secrets.json")
-
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
-
-# secrets.json 파일에서 SECRET_KEY 가져오기
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-
+# 기존 SECRET_KEY 대신 사용합니다.
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+"""
+# 기존 
+DEBUG = True
+"""
+
+# 수정
+# 환경 변수에서 가져온 DEBUG 값이
+# (개발 환경) "True" 라면 DEBUG에 True 가 할당됩니다.
+# (배포 환경) "False" 라면 DEBUG에 False 가 할당됩니다.
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
 
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".herokuapp.com"]
 
 # Application definition
 
@@ -162,9 +155,9 @@ STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 MEDIA_ROOT = BASE_DIR / "image"
 MEDIA_URL = "/media/"
